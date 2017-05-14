@@ -1,0 +1,64 @@
+.record-item {
+  margin: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.record-item > div {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+}
+
+.record-item-description {
+  align-items: stretch;
+}
+
+.record-item-description-text {
+  display: flex;
+  flex-grow: 1;
+  max-height: 1.1em;
+  overflow: hidden;
+  transition: max-height 0.25s ease-out;
+}
+
+.record-item-description-text.expanded {
+  max-height: 500px;
+  transition: max-height 0.25s ease-in;
+}
+
+.record-item-description-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.record-item-description-expand:hover {
+  background-color: #ddd;
+}
+
+.record-item-audio {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.record-item-audio audio {
+  flex-grow: 1;
+}
+
+.record-item-duration {
+  color: #969494;
+  font-weight: 200;
+  margin-left: 16px;
+}
+
+.record-item-credencials {
+  justify-content: space-between;
+}
+
+.record-item-credencials-created {
+  color: #969494;
+  font-weight: 200;
+}
