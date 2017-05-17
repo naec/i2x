@@ -47,8 +47,6 @@ class Auth extends React.Component {
       });
 
       authAction.then(response => {
-
-        console.log(1);
         if (response && response.token) {
           Toast.success('You are logged in');
           localStorage.setItem('authToken', response.token);
@@ -60,13 +58,10 @@ class Auth extends React.Component {
           });
         }
       }).catch((error) => {
-        console.log(2, '~~');
-
         this.setState({
           isSubmitDisabled: false,
         }, () => {
-            console.log('kek')
-          Toast.success('You are NOT logged in');
+          Toast.danger('You are NOT logged in');
           return Promise.resolve();
         })
       });

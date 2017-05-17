@@ -3,8 +3,4 @@ import appReducer from './reducers';
 
 const store = createStore(appReducer);
 
-// store.subscribe(() => {
-//   console.log('store.getState()', store.getState());
-// })
-
 export default store;

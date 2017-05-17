@@ -33,8 +33,6 @@ const api = (requestString, params = {}) => {
   }
 
   return resultingPromise.then(res=>{
-    console.log('  res', res.status);
-
     if (res.status !== 200){
       return Promise.reject();
     } else {

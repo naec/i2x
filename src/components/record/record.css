@@ -18,7 +18,8 @@
 .record-item-description-text {
   display: flex;
   flex-grow: 1;
-  max-height: 1.1em;
+  max-height: 1.5em;
+  line-height: 1.5em;
   overflow: hidden;
   transition: max-height 0.25s ease-out;
 }

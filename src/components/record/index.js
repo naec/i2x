@@ -1,5 +1,5 @@
 import React from 'react';
-import FontIcon from 'material-ui/FontIcon';
+import { FlatButton, FontIcon } from 'material-ui'
 import { blue500 } from 'material-ui/styles/colors';
 import Rating from 'components/rating';
 import './record.css';
@@ -51,22 +51,15 @@ class Record extends React.Component {
         </div>
         <div className="record-item-description">
           <div className={descriptionClassList}>
-            {this.state.final_script}
-          </div>
-          <div
-            onClick={this.onToggleExpand}
-            className="record-item-description-expand">
-            
-            <FontIcon
-              className="material-icons"
-              style={iconStyles}
-              color={blue500}
-              >{expandButtonName}</FontIcon>
+            {this.state.final_script.replace(/http[s]?\S+/g, <a href="\0">\0</a>)}
           </div>
         </div>
         <div className="record-item-credencials">
           <div>
             <Rating value={this.state.rating} />
+          </div>
+          <div>
+            <FlatButton onClick={this.onToggleExpand} rippleColor={blue500} label="Toggle description" />
           </div>
           <div className="record-item-credencials-created">
             Added: {this.state.created}

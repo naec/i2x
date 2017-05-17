@@ -1,7 +1,18 @@
 import React from 'react';
 import {Snackbar} from 'material-ui';
 
-const toastList = [];
+const toastList = {
+  items: []
+};
+
+const handler = {
+  set: (target, key, value) => {
+    target[key] = value;
+    return true;
+  },
+};
+
+let toastListProxy = new Proxy(toastList, handler);
 
 const toastStyles = {
   simple: {
@@ -18,25 +29,24 @@ const toastStyles = {
 export default class Toast extends React.Component {
 
   static simple(message) {
-    toastList.push({
+    toastListProxy.items = [...toastListProxy.items, {
       message,
       type: 'simple'
-    });
+    }];
   };
 
   static success(message) {
-    toastList.push({
+    toastListProxy.items = [...toastListProxy.items, {
       message,
       type: 'success'
-    })
+    }];
   };
 
   static danger(message) {
-    console.log('message',message);
-    toastList.push({
+    toastListProxy.items = [...toastListProxy.items, {
       message,
       type: 'danger'
-    })
+    }];
   };
 
   constructor() {
@@ -48,17 +58,23 @@ export default class Toast extends React.Component {
         type: ''
       }
     };
-  }
 
-  componentShouldUpdate() {
-    console.log('!!!');
+    toastListProxy = new Proxy(toastList, {
+      set: (target, key, value) => {
+        target[key] = value;
+        if(value.length){
+          this.showNext();
+        }
+        return true;
+      },
+    });
   }
 
   showNext() {
     if (!this.state.isVisible) {
       this.setState({
         isVisible: true,
-        toast: {...toastList[0]}
+        toast: {...toastListProxy.items[0]}
       });
     }
   }
@@ -73,19 +89,15 @@ export default class Toast extends React.Component {
         }
       }, () => {
         setTimeout(() => {
-          toastList.shift();
+          let pipe = [...toastListProxy.items];
+          pipe.shift();
+          toastListProxy.items = pipe;
         }, 100);
       });
     }
   };
 
   render() {
-    console.log('toastList',toastList);
-
-    if (toastList.length) {
-      this.showNext();
-    }
-
     return <Snackbar
       bodyStyle={toastStyles[this.state.toast.type]}
       open={this.state.isVisible}
