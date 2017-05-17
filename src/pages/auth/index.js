@@ -5,8 +5,8 @@ import authApi from 'api/auth';
 import store from 'store/auth-store';
 import { setUserToken } from 'store/actions';
 import Toast from 'packages/mui-snackbar-pipe';
-class Auth extends React.Component {
 
+class Auth extends React.Component {
   constructor() {
     super();
     this.onLoginChanged = this.onLoginChanged.bind(this);
