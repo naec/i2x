@@ -18,8 +18,8 @@ class Auth extends React.Component {
     let state = store.getState();
 
     this.state = {
-      login: 'challenge@i2x.ai',
-      password: 'pass123',
+      login: '',
+      password: '',
       loggedIn: !!state.authToken,
       isSubmitDisabled: false,
     }
